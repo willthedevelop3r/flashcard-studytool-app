@@ -1,0 +1,13 @@
+.card-header div {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.card-cardCount {
+  margin-top: 0;
+}
+
+ul {
+  text-decoration: none;
+}
