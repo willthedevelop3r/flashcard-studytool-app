@@ -46,7 +46,7 @@ function Study({ cards, setCards }) {
 
   const currentCard = cards[cardIndex]; // CONST VARIABLE TO KEEP TRACK OF CARDS INDEX
 
-  // ------- TERNERY LOGIC IMPLEMENTED AFTER H2 TO DISPLAY CONTENTS ACCORDINGLY ------- //
+  // ------- CONDITIONAL LOGIC IMPLEMENTED AFTER H2 TO DISPLAY CONTENTS ACCORDINGLY ------- //
   return (
     <div>
       <nav aria-label="breadcrumb">

@@ -19,7 +19,7 @@ function CreateCard({ cards, setCards }) {
     readDeck(deckId) // IMPORTED HELPER FUNCTION TO MAKE AN API CALL TO READ DECK
       .then(setDeck) // SETTING DECK STATE TO RESPONSE
       .catch((error) => {
-        console.error(`Failed to load deck: ${error.message}`);
+        console.error(`Failed to load deck: ${error.message}`); // CATCH ERROR
       });
   }, [deckId]); // DECKID DEPENDENCY
 
