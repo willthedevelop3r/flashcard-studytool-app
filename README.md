@@ -1,8 +1,8 @@
-# Flashcard App Project
+# Flashcard App
 
 ## About
 
-This is a CRUD application that helps you study with flashcards. This was a cool project as it helped me to reinforce my skills and knowledge with React.
+This is a CRUD application that helps you study with flashcards. This project helped me to reinforce my skills and knowledge in using React and Bootstrap.
 
 ## Features And How To Use This App
 
