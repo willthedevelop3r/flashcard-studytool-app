@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { readDeck, createCard } from "../../utils/api";
-import CardForm from "./CardForm";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { readDeck, createCard } from '../../utils/api';
+import CardForm from './CardForm';
 
-// ------- COMPONENT TO CREATE CARD ------- //
+// Component to create card
 function CreateCard({ cards, setCards }) {
   const { deckId } = useParams();
   const history = useHistory();
   const [deck, setDeck] = useState({ cards: [] });
   const initialForm = {
-    front: "",
-    back: "",
+    front: '',
+    back: '',
   };
 
   const [formData, setFormData] = useState(initialForm);
 
   useEffect(() => {
-    readDeck(deckId) // IMPORTED HELPER FUNCTION TO MAKE AN API CALL TO READ DECK
-      .then(setDeck) // SETTING DECK STATE TO RESPONSE
+    readDeck(deckId) // Imported helper function to make an api call to read deck
+      .then(setDeck) // Setting deck state to response
       .catch((error) => {
-        console.error(`Failed to load deck: ${error.message}`); // CATCH ERROR
+        console.error(`Failed to load deck: ${error.message}`); // Catch any errors
       });
-  }, [deckId]); // DECKID DEPENDENCY
+  }, [deckId]); // DeckId dependency
 
-  // ------- CHANGE HANDLER FOR INPUT FIELDS ------- //
+  // Change handler for input fields
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // ------- SUBMIT HANDLER ------- //
+  // Submit handler
   const handleSubmit = (event) => {
     event.preventDefault();
     const newCard = {
@@ -38,35 +38,35 @@ function CreateCard({ cards, setCards }) {
       deckId,
     };
 
-    createCard(deckId, newCard) // IMPORTED HELPER FUNCTION TO MAKE A "POST" REQUEST TO CREATE CARD
+    createCard(deckId, newCard) // Call the api helper function
       .then(() => {
-        setCards([...cards, newCard]); // SET CARDS STATE WITH THE NEW CARD ADDED
-        setFormData(initialForm); // CLEAR "FORM" INPUT FIELDS
+        setCards([...cards, newCard]); // Set cards state with new card added
+        setFormData(initialForm); // Clear form input fields
       })
       .catch((error) => {
-        console.error(`Failed to create deck: ${error.message}`); // CATCH ANY ERRORS
+        console.error(`Failed to create deck: ${error.message}`); // Catch any errors
       });
   };
 
-  // ------- CANCEL HANDLER TAKES USER TO "VIEW" DECK PAGE ------- //
+  // Cancel handler takes user to "view" deck page
   const handleCancel = () => {
     history.push(`/decks/${deckId}`);
   };
 
-  // ------- RETURN NAV BAR AND CARDFORM WITH FUNCTIONALITY ------- //
+  // Return nav bar and cardfrom with functionality
   return (
     <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/">
-              <span className="oi oi-home"></span> Home
+      <nav aria-label='breadcrumb'>
+        <ol className='breadcrumb'>
+          <li className='breadcrumb-item'>
+            <Link to='/'>
+              <span className='oi oi-home'></span> Home
             </Link>
           </li>
-          <li className="breadcrumb-item">
+          <li className='breadcrumb-item'>
             <Link to={`/decks/${deckId}`}>{deck.name}</Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          <li className='breadcrumb-item active' aria-current='page'>
             Add Card
           </li>
         </ol>
@@ -77,8 +77,8 @@ function CreateCard({ cards, setCards }) {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         formData={formData}
-        cancelLabel="Done"
-        submitLabel="Save"
+        cancelLabel='Done'
+        submitLabel='Save'
       />
     </>
   );

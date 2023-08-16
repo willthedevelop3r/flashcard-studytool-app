@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-// ------- NOT FOUND COMPONENT ------ //
+// Not found component
 function NotFound() {
   return (
-    <div className="NotFound">
+    <div className='NotFound'>
       <h1>Not Found</h1>
     </div>
   );

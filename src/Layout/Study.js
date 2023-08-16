@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { readDeck } from "../utils/api";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { readDeck } from '../utils/api';
 
-// ------- STUDY COMPONENT ------- //
+// Study component
 function Study({ cards, setCards }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
@@ -11,85 +11,84 @@ function Study({ cards, setCards }) {
   const history = useHistory();
 
   useEffect(() => {
-    readDeck(deckId) // IMPORTED HELPER FUNCTION TO MAKE AN API CALL TO READ DECK
+    readDeck(deckId) // Imported helper function to make an api call
       .then((response) => {
-        setDeck(response); // SET DECK STATE TO RESPONSE
-        setCards(response.cards); // SET CARDS STATE TO RESPONSE.CARDS
+        setDeck(response); // Set deck state to response
+        setCards(response.cards); // Set cards state to response
       })
       .catch((error) => {
-        console.error(`Failed to load: ${error.message}`); // CATCH ANY ERRORS
+        console.error(`Failed to load: ${error.message}`); // Catch any errors
       });
-  }, [deckId, setCards]); // DECKID AND SETCARDS DEPENDENCY
+  }, [deckId, setCards]); // Dependency
 
-  // ------- HANDLER FOR FLIP BUTTON ------- //
+  // Handler for flip button
   const handleFlip = () => setIsFlipped(!isFlipped);
 
-  // ------- HANDLER FOR NEXT BUTTON WITH RESTART PROMPT ------- //
+  // Handler for next button with restart prompt
   const handleNext = () => {
-    // IF TRUE THERE ARE MORE CARDS TO SHOW
+    // If true there are more cards to show
     if (cardIndex < cards.length - 1) {
-      setCardIndex(cardIndex + 1); // ADD ONE TO CARDINDEX STATE
-      setIsFlipped(false); // SET ISFLIPPED STATE TO BACK FALSE TO SHOW FRONT OF CARD
-    } else {
+      setCardIndex(cardIndex + 1); // Add one to cardindex state
+      setIsFlipped(false); // Set isflipped state to back false to show front of card
       const confirmed = window.confirm(
         "Restart the deck? Click 'Cancel' to return to the home screen."
       );
-      // IF TRUE RESTART DECK OTHERWISE TAKE USER TO HOME
+      // If true restart deck otherwise take user to home
       if (confirmed) {
-        setCardIndex(0); // SET CARDINDEX STATE BACK TO ZERO TO RESTART DECK
+        setCardIndex(0); // Set cardindex state back to zero to restart deck
         setIsFlipped(false);
       } else {
-        history.push("/");
+        history.push('/');
       }
     }
   };
 
-  const currentCard = cards[cardIndex]; // CONST VARIABLE TO KEEP TRACK OF CARDS INDEX
+  const currentCard = cards[cardIndex]; // Const variable to keep track of cards index
 
-  // ------- CONDITIONAL LOGIC IMPLEMENTED AFTER H2 TO DISPLAY CONTENTS ACCORDINGLY ------- //
+  // Conditional logic implemented after h2 to display contents accordingly
   return (
     <div>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/">
-              <span className="oi oi-home"></span> Home
+      <nav aria-label='breadcrumb'>
+        <ol className='breadcrumb'>
+          <li className='breadcrumb-item'>
+            <Link to='/'>
+              <span className='oi oi-home'></span> Home
             </Link>
           </li>
-          <li className="breadcrumb-item">
+          <li className='breadcrumb-item'>
             <Link to={`/decks/${deckId}`}>{deck.name}</Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          <li className='breadcrumb-item active' aria-current='page'>
             Study
           </li>
         </ol>
       </nav>
       <h2>Study: {deck.name}</h2>
       {cards.length >= 3 ? (
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">
+        <div className='card'>
+          <div className='card-body'>
+            <h5 className='card-title'>
               Card {cardIndex + 1} of {cards.length}
             </h5>
-            <p className="card-text">
+            <p className='card-text'>
               {isFlipped ? currentCard.back : currentCard.front}
             </p>
-            <button className="btn btn-secondary mr-2" onClick={handleFlip}>
+            <button className='btn btn-secondary mr-2' onClick={handleFlip}>
               Flip
             </button>
             {isFlipped && (
-              <button className="btn btn-primary" onClick={handleNext}>
+              <button className='btn btn-primary' onClick={handleNext}>
                 Next
               </button>
             )}
           </div>
         </div>
       ) : (
-        <div className="alert alert-info">
+        <div className='alert alert-info'>
           <h3>Not enough cards in the deck.</h3>
           <p>You need at least 3 cards to study.</p>
-          <Link to={`/decks/${deckId}/cards/new`} className="btn btn-primary">
-            <span className="oi oi-plus"></span> Add Cards
+          <Link to={`/decks/${deckId}/cards/new`} className='btn btn-primary'>
+            <span className='oi oi-plus'></span> Add Cards
           </Link>
         </div>
       )}

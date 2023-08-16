@@ -1,37 +1,37 @@
-import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import Header from "./Header";
-import NotFound from "./NotFound";
-import Home from "./Home";
-import CreateDeck from "./Deck/CreateDeck";
-import View from "./View";
-import Study from "./Study";
-import CreateCard from "./Card/CreateCard";
-import EditCard from "./Card/EditCard";
-import EditDeck from "./Deck/EditDeck";
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Header from './Header';
+import NotFound from './NotFound';
+import Home from './Home';
+import CreateDeck from './Deck/CreateDeck';
+import View from './View';
+import Study from './Study';
+import CreateCard from './Card/CreateCard';
+import EditCard from './Card/EditCard';
+import EditDeck from './Deck/EditDeck';
 
-// ------- COMPONENT FOR LAYOUT ------- //
+// Component for layout
 function Layout() {
   const [decks, setDecks] = useState([]);
   const [cards, setCards] = useState([]);
   const [deck, setDeck] = useState({});
 
-  // ------- RETURN COMPONENTS WITH ROUTES AND PROPS PASSED IN ------- //
+  // Return components with routes and props passed in
   return (
     <>
       <Header />
-      <div className="container">
+      <div className='container'>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Home />
           </Route>
-          <Route path="/decks/new">
+          <Route path='/decks/new'>
             <CreateDeck decks={decks} setDecks={setDecks} />
           </Route>
-          <Route exact path="/decks/:deckId">
+          <Route exact path='/decks/:deckId'>
             <View />
           </Route>
-          <Route path="/decks/:deckId/study">
+          <Route path='/decks/:deckId/study'>
             <Study
               cards={cards}
               setCards={setCards}
@@ -39,10 +39,10 @@ function Layout() {
               setDeck={setDeck}
             />
           </Route>
-          <Route path="/decks/:deckId/edit">
+          <Route path='/decks/:deckId/edit'>
             <EditDeck />
           </Route>
-          <Route path="/decks/:deckId/cards/new">
+          <Route path='/decks/:deckId/cards/new'>
             <CreateCard
               cards={cards}
               setCards={setCards}
@@ -50,10 +50,10 @@ function Layout() {
               setDeck={setDeck}
             />
           </Route>
-          <Route path="/decks/:deckId/cards/:cardId/edit">
+          <Route path='/decks/:deckId/cards/:cardId/edit'>
             <EditCard />
           </Route>
-          <Route path="*">
+          <Route path='*'>
             <NotFound />
           </Route>
         </Switch>

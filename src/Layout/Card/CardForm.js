@@ -1,5 +1,5 @@
-import React from "react";
-// ------- COMPONENT FOR THE CARD FORM ------- //
+import React from 'react';
+// Component for card from
 function CardForm({
   header,
   handleSubmit,
@@ -9,39 +9,39 @@ function CardForm({
   cancelLabel,
   submitLabel,
 }) {
-  // ------- CARD FORM STRUCTURE ------- //
+  // Card form structure
   return (
     <>
       <h2>{header}</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="front">Front</label>
+        <div className='form-group'>
+          <label htmlFor='front'>Front</label>
           <textarea
-            className="form-control"
-            id="front"
+            className='form-control'
+            id='front'
             value={formData.front}
-            name="front"
+            name='front'
             onChange={handleChange}
-            placeholder="Front side of card"
+            placeholder='Front side of card'
             required
           ></textarea>
         </div>
-        <div className="form-group">
-          <label htmlFor="back">Back</label>
+        <div className='form-group'>
+          <label htmlFor='back'>Back</label>
           <textarea
-            className="form-control"
-            id="back"
+            className='form-control'
+            id='back'
             value={formData.back}
-            name="back"
+            name='back'
             onChange={handleChange}
-            placeholder="Back side of card"
+            placeholder='Back side of card'
             required
           ></textarea>
         </div>
-        <button className="btn btn-secondary mr-2" onClick={handleCancel}>
+        <button className='btn btn-secondary mr-2' onClick={handleCancel}>
           {cancelLabel}
         </button>
-        <button type="submit" className="btn btn-primary mr-2">
+        <button type='submit' className='btn btn-primary mr-2'>
           {submitLabel}
         </button>
       </form>

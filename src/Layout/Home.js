@@ -1,10 +1,10 @@
-import React from "react";
-import DeckList from "./Deck/DeckList";
+import React from 'react';
+import DeckList from './Deck/DeckList';
 
-// ------- HOME PAGE COMPONENT ------- //
+// Home page component
 function Home() {
   return (
-    <div className="container">
+    <div className='container'>
       <DeckList />
     </div>
   );

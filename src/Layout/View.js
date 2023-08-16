@@ -1,49 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { readDeck, deleteDeck } from "../utils/api";
-import CardsList from "./Card/CardsList";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { readDeck, deleteDeck } from '../utils/api';
+import CardsList from './Card/CardsList';
 
-// ------- VIEW COMPONENT ------- //
+// View component
 function View() {
   const { deckId } = useParams();
   const history = useHistory();
   const [deck, setDeck] = useState({ cards: [] });
 
-  // ------- FUNCTION TO LOAD DECKS ------- //
+  // Function to load decks
   function loadingDeck() {
-    readDeck(deckId).then(setDeck); // HELPER FUNCTION IMPORTED TO MAKE AN API CALL TO READ DECK THEN SET DECK STATE TO RESPONSE
+    readDeck(deckId).then(setDeck); // Helper function to make an api call
   }
 
-  useEffect(loadingDeck, [deckId]); // RUN LOADINGDECK WHEN DECKID CHANGES
+  useEffect(loadingDeck, [deckId]); // Dependency
 
-  // ------- DELETE HANDLER WITH PROMPT ------- //
+  // Delete handler with prompt
   const handleDelete = () => {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this deck?"
+      'Are you sure you want to delete this deck?'
     );
 
     if (confirmed) {
-      deleteDeck(deckId) // IMPORTED HELPER FUNCTION TO MAKE A "DELETE" REQUEST TO DELETE DECK
+      deleteDeck(deckId) // Imported helper function to make api call
         .then(() => {
-          history.push("/"); // TAKE USER TO HOME PAGE
+          history.push('/'); // Take user to home page
         })
         .catch((error) => {
-          console.error("Error deleting deck:", error); // CATCH ANY ERRORS
+          console.error('Error deleting deck:', error); // Catch any errors
         });
     }
   };
 
-  // ------- RETURN NAVBAR, BUTTONS, AND CARDLIST WITH FUNCTIONALITY ------- //
+  // Return navbar, buttons, and cardlist with functionality
   return (
     <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/">
-              <span className="oi oi-home"></span> Home
+      <nav aria-label='breadcrumb'>
+        <ol className='breadcrumb'>
+          <li className='breadcrumb-item'>
+            <Link to='/'>
+              <span className='oi oi-home'></span> Home
             </Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          <li className='breadcrumb-item active' aria-current='page'>
             {deck.name}
           </li>
         </ol>
@@ -53,23 +53,23 @@ function View() {
         <p>{deck.description}</p>
       </div>
       <div>
-        <Link to={`/decks/${deckId}/edit`} className="btn btn-secondary mr-2">
-          <span className="oi oi-pencil"></span> Edit
+        <Link to={`/decks/${deckId}/edit`} className='btn btn-secondary mr-2'>
+          <span className='oi oi-pencil'></span> Edit
         </Link>
-        <Link to={`/decks/${deckId}/study`} className="btn btn-primary mr-2">
-          <span className="oi oi-book"></span> Study
+        <Link to={`/decks/${deckId}/study`} className='btn btn-primary mr-2'>
+          <span className='oi oi-book'></span> Study
         </Link>
         <Link
           to={`/decks/${deckId}/cards/new`}
-          className="btn btn-primary mr-2"
+          className='btn btn-primary mr-2'
         >
-          <span className="oi oi-plus"></span> Add Cards
+          <span className='oi oi-plus'></span> Add Cards
         </Link>
-        <button className="btn btn-danger" onClick={handleDelete}>
-          <span className="oi oi-trash"></span> Delete Deck
+        <button className='btn btn-danger' onClick={handleDelete}>
+          <span className='oi oi-trash'></span> Delete Deck
         </button>
       </div>
-      <div className="mt-4">
+      <div className='mt-4'>
         <CardsList deck={deck} setDeck={setDeck} />
       </div>
     </>
