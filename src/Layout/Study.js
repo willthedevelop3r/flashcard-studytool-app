@@ -30,6 +30,7 @@ function Study({ cards, setCards }) {
     if (cardIndex < cards.length - 1) {
       setCardIndex(cardIndex + 1); // Add one to cardindex state
       setIsFlipped(false); // Set isflipped state to back false to show front of card
+    } else {
       const confirmed = window.confirm(
         "Restart the deck? Click 'Cancel' to return to the home screen."
       );
